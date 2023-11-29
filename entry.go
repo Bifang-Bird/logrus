@@ -17,6 +17,9 @@ var (
 	// qualified package name, cached at first use
 	logrusPackage string
 
+	simbapkg string = "codeup.aliyun.com/6145b2b428003bdc3daa97c8/go-simba/go-simba-pkg.git/logger"
+
+	slogpkg string = "golang.org/x/exp/slog"
 	// Positions in the call stack when tracing to report the calling method
 	minimumCallerDepth int
 
@@ -203,7 +206,7 @@ func getCaller() *runtime.Frame {
 		pkg := getPackageName(f.Function)
 
 		// If the caller isn't part of this package, we're done
-		if pkg != logrusPackage {
+		if pkg != logrusPackage && pkg != simbapkg && pkg != slogpkg {
 			return &f //nolint:scopelint
 		}
 	}
